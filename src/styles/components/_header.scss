@@ -1,0 +1,14 @@
+.header-container {
+  background-color: rgb(31, 30, 30);
+  color: white;
+  margin-bottom: 4rem;
+  padding: 1.6rem 0;
+
+  &__title {
+    color: red;
+  }
+
+  &__slogan {
+    color: green;
+  }
+}

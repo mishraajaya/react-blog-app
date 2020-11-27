@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 const Header = ({ slogan, title }) => {
   return (
-    <div>
-      <h1>{title}</h1>
+    <div className="header-container">
+      <h1 className="header-container__title">{title}</h1>
       {typeof(slogan) !== "undefined" && (
-        <h3>{slogan}</h3>
+        <h3 className="header-container__slogan">{slogan}</h3>
       )}
     </div>
   )
@@ -14,7 +14,7 @@ const Header = ({ slogan, title }) => {
 
 Header.propTypes = {
   slogan: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string.isRequired
 }
 
 export default Header

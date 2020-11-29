@@ -1,14 +1,20 @@
-.header-container {
-  background-color: rgb(31, 30, 30);
-  color: white;
-  margin-bottom: 4rem;
-  padding: 1.6rem 0;
+.header-root {
+  display: block;
 
-  &__title {
-    color: red;
+  &.top-nav-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
   }
 
-  &__slogan {
-    color: green;
+  &.menu-nav-bar {
+    display: flex;
+    position: relative;
+    align-items: center;
   }
+}
+
+.menuItem {
+  padding: 0.8rem;
 }

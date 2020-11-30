@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import SignInUpModal from '../common/header/signInUpModal'
+import React, { useState, useRef } from 'react'
+import SignInUpModal from 'components/common/header/signInUpModal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
   const menuItems = ['Home', 'Profile', 'About', 'Blog', 'Image Gallery', 'Contact Us']
@@ -7,8 +9,10 @@ const Header = () => {
   const [showModal, setShowModal] = useState(false)
   const [userLoggedIn, setUserLoggedIn] = useState(false)
 
+  const userNameRef = useRef(null)
+
   const renderMenuItems = (menuItem, index) => {
-    return <a href="#" className="menuItem" key={index}>{menuItem}</a>
+    return <a href="#" className="header-root menuItem" key={index}>{menuItem}</a>
   }
 
   const toggleLoginModal = () => {
@@ -18,19 +22,28 @@ const Header = () => {
   return (
     <div className="header-root">
       <div className="header-root top-nav-bar">
-        <button>Subscribe</button>
-        <h2>My React Blog Site</h2>
-        <button>Search</button>
+        <button className="button header-root__top-button">Subscribe</button>
+        <h2 className="page-title">My React Blog Site</h2>
+        <FontAwesomeIcon icon={faSearch} />
         {userLoggedIn ? (
-          <div>Welcome</div>
+          <div>Welcome, {userNameRef.current.value}</div>
         ) : (
-          <button onClick={toggleLoginModal}>SignIn / SignUp</button>
+          <button
+            className="button header-root__top-button outline"
+            onClick={toggleLoginModal}
+          >
+            SignIn / SignUp
+          </button>
         )}
       </div>
       <div className="header-root menu-nav-bar">
         {menuItems.map(renderMenuItems)}
       </div>
-      <SignInUpModal showModal={showModal} setUserLoggedIn={setUserLoggedIn} />
+      <SignInUpModal
+        showModal={showModal}
+        setUserLoggedIn={setUserLoggedIn}
+        userNameRef={userNameRef}
+      />
     </div>
   )
 }

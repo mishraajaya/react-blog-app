@@ -1,0 +1,11 @@
+.modal {
+  
+  &.container {
+    position: absolute;
+    width: 50rem;
+    background: grey;
+    left: 30%;
+    top: 30%;
+    padding: 2rem;
+  }
+}

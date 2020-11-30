@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SignInUpModal = ({ showModal, setUserLoggedIn }) => {
+const SignInUpModal = ({ showModal, setUserLoggedIn, userNameRef }) => {
   if (!showModal) return null
 
   const getUserDetails = () => {
@@ -8,10 +8,10 @@ const SignInUpModal = ({ showModal, setUserLoggedIn }) => {
   }
 
   return (
-    <div>
-      <div>
+    <div className="modal">
+      <div className="modal container">
         <label>Enter your Name</label>
-        <input type="text"></input>
+        <input ref={userNameRef} type="text"></input>
         <button onClick={getUserDetails}>Sign In</button>
       </div>
     </div>

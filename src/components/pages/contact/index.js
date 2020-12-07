@@ -1,27 +1,49 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 const Contact = () => {
-  const [name, setName] = useState('')
+  const [values, setValues] = useState(
+    {
+      name: '',
+      email: '',
+      feedback: ''
+    }
+  )
+
   const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
 
   const firstRender = useRef(true)
 
+  const usePrevious = value => {
+    const ref = useRef()
+    useEffect(() => {
+      ref.current = value
+    })
+    return ref.current
+  }
+
+  const perviousName = usePrevious(values.name)
+  const previousEmail = usePrevious(values.email)
+
   useEffect(() => {
-    console.log("useEffect Called!!!!")
     if (firstRender.current) firstRender.current = false
     else validateForm()
-  }, [name])
+  }, [values])
 
   const validateForm = () => {
-    if (name === '')
-      setNameError(true)
-    else
-      setNameError(false)
+    if (values.name !== perviousName)
+      values.name === '' ? setNameError(true) : setNameError(false)
+    if (values.email !== previousEmail)
+      values.email === '' ? setEmailError(true) : setEmailError(false)
   }
 
   const getName = e => {
-    console.log("Value=", e.target.value)
-    setName(e.target.value)
+    setValues({...values, name: e.target.value})
+  }
+
+
+  const getEmail = e => {
+    setValues({...values, email: e.target.value})
   }
 
   return (
@@ -46,10 +68,14 @@ const Contact = () => {
           <div className="input-container">
             <label className="form-label">Email:</label>
             <input
-              className="form-input"
+              className={`form-input ${emailError && 'error'} `}
               type="email"
               placeholder="Enter the Email."
+              onChange={getEmail}
             />
+            {emailError && (
+              <span className="errorLabel">Email is Empty.</span>
+            )}
           </div>
           <div className="input-container">
             <label className="form-label">Message:</label>

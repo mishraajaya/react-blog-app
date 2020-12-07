@@ -1,0 +1,73 @@
+input:focus, textarea:focus {
+  outline: none;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-section {
+  padding: 2rem;
+}
+
+.form-container {
+  display: flex;
+  width: 50rem;
+  flex-direction: column;
+  border: 1px solid rgb(1, 49, 19);
+}
+
+.title-container {
+  color: white;
+  font-size: 2rem;
+  background: rgb(1, 49, 19);
+  display: flex;
+  justify-content: center;
+
+  .label {
+    padding: 1.5rem;
+  }
+}
+
+.input-container {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+}
+
+.form-label {
+  color: rgb(0, 20, 10);
+  padding-bottom: 0.3rem;
+}
+
+.form-input {
+  border: 1px solid rgb(1, 49, 19);
+  padding: 0.7rem 1.4rem 1rem;
+
+  &.error {
+    border: 2px solid rgb(209, 0, 0) !important;
+  }
+}
+
+.form-input:focus {
+  border: 2px solid rgb(1, 49, 19);
+}
+
+.form-button {
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(0, 34, 0);
+}
+
+.errorLabel {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 0.3rem;
+}

@@ -1,8 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import MainApp from './main'
+import Routes from './routes'
+import Header from 'components/common/header'
 
 import "./styles/main.scss"
 
-ReactDOM.render(<MainApp />, document.getElementById('root'))
+const Root = () => {
+  return (
+    <>
+      <Header />
+      <Routes/>
+    </>
+  )
+}
+
+ReactDOM.render(<Root />, document.getElementById('root'))

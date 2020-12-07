@@ -4,7 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
-  const menuItems = ['Home', 'Profile', 'About', 'Blog', 'Image Gallery', 'Contact Us']
+  const menuItems = [
+    {
+      label: 'Home',
+      path: '/'
+    },
+    {
+      label: 'Profile',
+      path: '/profile'
+    },
+    {
+      label: 'About',
+      path: '/about'
+    },
+    {
+      label: 'Blog',
+      path: '/blog'
+    },
+    {
+      label: 'Image Gallery',
+      path: '/images'
+    },
+    {
+      label: 'Contact Us',
+      path: '/contact'
+    }
+  ]
   
   const [showModal, setShowModal] = useState(false)
   const [userLoggedIn, setUserLoggedIn] = useState(false)
@@ -12,7 +37,7 @@ const Header = () => {
   const userNameRef = useRef(null)
 
   const renderMenuItems = (menuItem, index) => {
-    return <a href="#" className="header-root menuItem" key={index}>{menuItem}</a>
+    return <a href={menuItem.path} className="header-root menuItem" key={index}>{menuItem.label}</a>
   }
 
   const toggleLoginModal = () => {

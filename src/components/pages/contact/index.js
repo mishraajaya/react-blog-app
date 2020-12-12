@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import InputBox from 'components/common/formElements/inputBox'
 
 const Contact = () => {
   const [values, setValues] = useState(
@@ -11,6 +12,8 @@ const Contact = () => {
 
   const [nameError, setNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
+
+  const [emailErrorMessage, setEmailErrorMessage] = useState('')
 
   const firstRender = useRef(true)
 
@@ -31,10 +34,20 @@ const Contact = () => {
   }, [values])
 
   const validateForm = () => {
+    const emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i)
     if (values.name !== perviousName)
       values.name === '' ? setNameError(true) : setNameError(false)
-    if (values.email !== previousEmail)
-      values.email === '' ? setEmailError(true) : setEmailError(false)
+    if (values.email !== previousEmail){
+      if (values.email === '') {
+        setEmailError(true)
+        setEmailErrorMessage('Email is Empty.')
+      } else {
+        if(!emailPattern.test(values.email)) {
+          setEmailError(true)
+          setEmailErrorMessage('Email is not Valid.')
+        } else setEmailError(false)
+      }
+    } 
   }
 
   const getName = e => {
@@ -53,37 +66,24 @@ const Contact = () => {
           <div className="title-container">
             <div className="title-container label">Contact Form</div>
           </div>
-          <div className="input-container">
-            <label className="form-label">Name:</label>
-            <input
-              className={`form-input ${nameError && 'error'} `}
-              type="text"
-              placeholder="Enter the Full Name."
-              onChange={getName}
-            />
-            {nameError && (
-              <span className="errorLabel">Name is Empty.</span>
-            )}
-          </div>
-          <div className="input-container">
-            <label className="form-label">Email:</label>
-            <input
-              className={`form-input ${emailError && 'error'} `}
-              type="email"
-              placeholder="Enter the Email."
-              onChange={getEmail}
-            />
-            {emailError && (
-              <span className="errorLabel">Email is Empty.</span>
-            )}
-          </div>
-          <div className="input-container">
-            <label className="form-label">Message:</label>
-            <textarea
-              className="input-container"
-              placeholder="Enter the Message."
-            ></textarea>
-          </div>
+          <InputBox
+            label="Name"
+            name="txtName"
+            placeholder="Enter the Full Name"
+            getValue={getName}
+            isError={nameError}
+            errorMessage="Name is Empty"
+          />
+          <InputBox
+            label="Email"
+            name="txtEmail" 
+            placeholder="Enter the Email Address" 
+            getValue={getEmail}
+            isError={emailError}
+            errorMessage={emailErrorMessage}
+          />
+          <InputBox label="Message" name="txtMessage" placeholder="Enter the Message" />
+
           <div  className="input-container">
             <button className="form-button">Submit Message</button>
           </div>

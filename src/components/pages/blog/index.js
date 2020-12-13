@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import ReadMore from './parts/readMore'
 
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([])
@@ -12,7 +13,7 @@ const Blog = () => {
       <div className="blog-container">
         <div className="blog-section">
           <div className="blog-title">{blogPost.title}</div>
-          <div className="blog-content">{blogPost.body}</div>
+          <ReadMore content={blogPost.body} />
         </div>
       </div>
     )
